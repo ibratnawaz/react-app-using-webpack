@@ -41,12 +41,20 @@ const App = () => {
 	);
 };
 
-function Hello(props) {
+type HelloPropsType = {
+	name: string;
+};
+
+type GreetingPropsType = {
+	time: string;
+};
+
+function Hello(props: HelloPropsType) {
 	if (props.name == '') throw new Error('Please provide a name');
 	return <h1>Hello {props.name}</h1>;
 }
 
-function Greeting(props) {
+function Greeting(props: GreetingPropsType) {
 	return <h2>Good {props.time}</h2>;
 }
 

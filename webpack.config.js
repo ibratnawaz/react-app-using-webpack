@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 /** @type {import('webpack').Configuration} */
 module.exports = {
 	mode: 'development',
-	entry: './src/index.js',
+	entry: './src/index.tsx',
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		filename: '[contenthash].js',
@@ -14,15 +14,14 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-react'],
-						plugins: ['@babel/plugin-proposal-class-properties']
-					}
-				}
+				loader: 'babel-loader',
+			},
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: 'ts-loader'
 			},
 			{
 				test: /\.css$/,
@@ -34,5 +33,6 @@ module.exports = {
 		new HtmlWebPackPlugin({
 			template: './src/index.html'
 		})
-	]
+	],
+	resolve: { extensions: ['.jsx', '.js', '.tsx', '.ts'] },
 };
